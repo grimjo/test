@@ -1,0 +1,66 @@
+
+.row-fluid .customizer li {
+    border: 1px solid #DDDDDD;
+    list-style-type:none;
+    margin-left:0;
+}
+.row-fluid .customizer {
+    border: 1px solid #DDDDDD;
+}
+
+.customizer li a.edit {
+    list-style-type:none;
+    margin-left:0;
+    text-align:center;
+}
+
+.btn.font-size span {
+  font-size:60%
+}
+
+.btn.font-size.small span {
+    font-size:60%;
+    font-weight:bold;
+}
+
+.btn.font-size.large:first-letter {
+    font-weight:bold;
+}
+
+.font-face-cursive {
+    font-family:cursive;
+}
+
+.font-face-ariel {
+    font-family:arial;
+}
+
+.engraving-inner {
+    background-repeat: no-repeat;
+    height:70px;
+    width:160px;
+    color:#FFF;
+    text-align:center;
+    padding-top:10px;
+    letter-spacing:1px;
+}
+
+.engraving-inner.brs {
+    color:#453328;
+    text-shadow:1px 1px #64554C;
+}
+
+.engraving-inner.blk {
+    color:#B5A642;
+    text-shadow:1px 1px #CBC17B;
+}
+.engraving-inner.alm {
+    color:#453328;
+    text-shadow:1px 1px #64554C;
+}
+
+.engraving-inner {
+    position:relative;
+    left:0;
+    top:-80px;
+}

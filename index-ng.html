@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html data-ng-app="componentsApp">
+<head>
+    <title>Product example template</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="css/customizer.css" rel="stylesheet" media="screen">
+</head>
+<body>
+<script src="http://code.jquery.com/jquery.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/holder.js"></script>
+<script src="js/angular.js"></script>
+<script src="js/ng-script.js"></script>
+<div class="navbar ">
+    <div class="navbar-inner">
+        <div class="container">
+            <ul id="main-menu" class="nav">
+                <li><a href="#">Sports</a></li>
+                <li><a href="#">Games & Activities</a></li>
+                <li><a href="#">Events & Holidays</a></li>
+                <li><a href="#">Academic</a></li>
+                <li><a href="#">Religious</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<ul class="container-fluid breadcrumb">
+    <li><a href="#">Home</a> <span class="divider">/</span></li>
+    <li><a href="#">Category</a> <span class="divider">/</span></li>
+    <li><a href="#">Sub-Category</a> <span class="divider">/</span></li>
+    <li class="active">Product</li>
+</ul>
+
+
+<div class="row-fluid">
+    <div id="Customizer" ng-controller="componentController">
+        <ul class="span6 offset1 customizer" >
+            <li data-ng-repeat="component in components" class="span12">
+                <h3>Select {{component.title}} style</h3>
+                <span data-ng-repeat="option in component.options">
+                    <img ng-class="{active :option.default}" height="{{component.height}}" width="{{component.width}}" ng-click="selectOption(component.id, option.sku)" ng-src="img/{{option.imgName}}.png">
+                </span>
+            </li>
+            <li class="span12">
+                <h3>Custom engraving</h3>
+                <button class="btn" ng-click="addLine()">Add Line</button>
+                <div data-ng-repeat="line in engraving.lines">
+                    <div class="input-append input-prepend ">
+                        <span class="add-on">Line {{line.id}}</span>
+                        <input class="text-center" id="appendedPrependedInputButtons" ng-model="line.value" type="text">
+                        <button class="btn font-size large" type="button">A<span>A</span></button>
+                    </div>
+
+                </div>
+
+            </li>
+        </ul>
+        <div class="span4 customizer">
+            <dl >
+                <dt ng-repeat-start="component in components">{{component.title}}</dt>
+                <dd ng-repeat-end="">{{component.selectedOption.title}}</dd>
+            </dl>
+            <dl class="hide">
+                <dt>Preview:</dt>
+                <dd ><canvas id="customizer-image"  width="160" height="80"></canvas></dd>
+            </dl>
+            <dl>
+                <dt>Engraving:</dt>
+                <dd class="engraving" class="text-center">
+                    <div class="engraving-inner {{config.Color}}">
+                        <div ng-repeat="line in engraving.lines">{{line.value}}</div>
+                    </div>
+                </dd>
+            </dl>
+            <dl>
+                <dt>Price:</dt>
+                <dd>
+                    {{getPrice() | currency}}
+                </dd>
+            </dl>
+        </div>
+
+    </div>
+</div>
+</body>
+</html>

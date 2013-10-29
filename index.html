@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html data-ng-app="componentsApp">
+<head>
+    <title>Product example template</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="css/customizer.css" rel="stylesheet" media="screen">
+</head>
+<body>
+
+<script src="http://code.jquery.com/jquery.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/holder.js"></script>
+<script src="js/angular.js"></script>
+<script src="js/ng-script.js"></script>
+<script src="js/customizer.js"></script>
+
+<div class="navbar ">
+    <div class="navbar-inner">
+        <div class="container">
+            <ul id="main-menu" class="nav">
+                <li><a href="#">Sports</a></li>
+                <li><a href="#">Games & Activities</a></li>
+                <li><a href="#">Events & Holidays</a></li>
+                <li><a href="#">Academic</a></li>
+                <li><a href="#">Religious</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<ul class="container-fluid breadcrumb">
+    <li><a href="#">Home</a> <span class="divider">/</span></li>
+    <li><a href="#">Category</a> <span class="divider">/</span></li>
+    <li><a href="#">Sub-Category</a> <span class="divider">/</span></li>
+    <li class="active">Product</li>
+</ul>
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span4 text-center">
+            <img data-src="js/holder.js/420x450" alt="">
+
+            <p class="text-center">Zoom</p>
+
+            <img data-src="js/holder.js/80x80">
+            <img data-src="js/holder.js/80x80">
+            <img data-src="js/holder.js/80x80">
+
+        </div>
+
+        <div class="span8"  ng-controller="componentController">
+            <div class="row-fluid">
+                <h1>Product name</h1>
+
+                <div class="span6">
+                    <p id="sku">Item #: ABC1234</p>
+                    <p id="stock"><strong>Availability: Out of stock</strong></p>
+                    <p id="description">You can never go wrong by presenting a classic Achievement trophy at your next event! With an Achievement column & a white marble-tone base plus the figure of your choice, this is the perfect trophy for your awards ceremony. Comes with 40 letters of free trophy personalization</p>
+                    <ul class="nav nav-pills">
+                        <li><a href="#">Email a friend</a></li>
+                        <li><a href="#">Print this page</a></li>
+                    </ul>
+
+                    <ul class="nav nav-pills">
+                        <li class="active"><a href="#">Small</#></a></li>
+                        <li><a href="#">Medium</#></a></li>
+                        <li><a href="#">Large</#></a></li>
+                    </ul>
+
+                    <form class="form-horizontal">
+                        <div class="input-appended">
+                            <label class="span2">Qty:</label>
+                            <input id="appendedInputButton"  class="span2" type="text" value="1">
+                            <button class="btn" type="button" ng-click="enableCustomizer()">Customize & Add to Cart</button>
+                            <a href="#" ng-click="init()" ng-show="showCustomizer">Cancel</a>
+                        </div>
+                    </form>
+                </div>
+                <div class="span4">
+                    <p>As low as:<br /><strong class="lead">$19.99</strong></p>
+
+                    <ul class="nav nav-pills">
+                        <li"><a href="#">View Bulk Pricing</a></li>
+                    </ul>
+
+                    <ul>
+                        <li>Ships by: 10-13-2013</li>
+                        <li>Free Shipping (orders over $100)</li>
+                        <li>Free Engraving (40 letters free)</li>
+                    </ul>
+                    <ul class="nav nav-pills">
+                        <li"><a href="#">When will I recieve my order</a></li>
+                    </ul>
+
+                </div>
+            </div>
+            <div class="row-fluid">
+                <div id="Customizer" ng-show="showCustomizer">
+                    <ul class="span6 offset1 customizer" >
+                        <li data-ng-repeat="component in components" class="span12">
+                            <h3>Select {{component.title}} style</h3>
+                            <span data-ng-repeat="option in component.options">
+                                <img ng-class="{active :option.default}" height="{{component.height}}" width="{{component.width}}" ng-click="selectOption(component.id, option.sku)" ng-src="img/{{option.imgName}}.png">
+                            </span>
+                        </li>
+                        <li class="span12">
+                            <h3>Custom engraving</h3>
+                            <button class="btn" ng-click="addLine()">Add Line</button>
+                            <div data-ng-repeat="line in engraving.lines">
+                                <div class="input-append input-prepend ">
+                                    <span class="add-on">Line {{line.id}}</span>
+                                    <input class="text-center" id="appendedPrependedInputButtons" ng-model="line.value" type="text">
+                                    <button class="btn font-size large" type="button">A<span>A</span></button>
+                                </div>
+
+                            </div>
+
+                        </li>
+                    </ul>
+                    <div class="span4 customizer">
+                        <dl >
+                            <dt ng-repeat-start="component in components">{{component.title}}</dt>
+                            <dd ng-repeat-end="">{{component.selectedOption.title}}</dd>
+                        </dl>
+
+                        <dl>
+                            <dt>Engraving:</dt>
+                            <dd class="engraving" class="text-center">
+                                <canvas id="customizer-image"  width="160" height="80"></canvas>
+                                <div class="engraving-inner {{config.Color}}">
+
+                                    <div ng-repeat="line in engraving.lines">{{line.value}}</div>
+                                </div>
+                            </dd>
+                        </dl>
+                        <dl>
+                            <dt>Price:</dt>
+                            <dd>
+                                {{getPrice() | currency}}
+                            </dd>
+                        </dl>
+                    </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row-fluid">
+        <div class="span9">
+            <h4>More in Category:</h4>
+            <div class="span4">
+                <img data-src="js/holder.js/240x240">
+                <p class="text-left"> Product Name </p>
+                <p class="text-left">As Low As: $19.99</p>
+                <p class="text-left">$19.99 - $49.99</p>
+            </div>
+            <div class="span4">
+                <img data-src="js/holder.js/240x240">
+                <p class="text-left"> Product Name </p>
+                <p class="text-left">As Low As: $19.99</p>
+                <p class="text-left">$19.99 - $49.99</p>
+            </div>
+            <div class="span3">
+                <img data-src="js/holder.js/240x240">
+                <p class="text-left"> Product Name </p>
+                <p class="text-left">As Low As: $19.99</p>
+                <p class="text-left">$19.99 - $49.99</p>
+            </div>
+        </div>
+
+        <div class="span3">
+            <h4>First Place Product:</h4>
+            <img data-src="js/holder.js/240x240">
+            <p class="text-left"> Product Name </p>
+            <p class="text-left">As Low As: $19.99</p>
+            <p class="text-left">$19.99 - $49.99</p>
+        </div>
+
+    </div>
+
+    <div class="row-fluid">
+        <div class="span12 well">
+            <h4>What our customers are saying:</h4>
+            <p>Given the size of the order and the different teams involved, I was amazed at how quickly the order was processed. Better than I imagined. In fact, each box was separated by those teams represented within the shipped box.<br />- Chris G.</p>
+            <p>My order was handled over the weekend - with a one day notice. Your customer service is amazing. The 2 plaques we ordered were absolutely perfect.<br />- Cindy L.</p>
+            <p>Every order I have purchased has arrived earlier than expected. That's why I always buy from Dinn! I love the trophies and plaques. They are very nice and the prices are GREAT!<br />- Talaya S.</p>
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>
